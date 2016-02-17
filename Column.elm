@@ -15,8 +15,8 @@ type alias Model =
   , field : String
   }
 
-model : Model
-model =
+init : Model
+init =
   { cards = []
   , field = ""
   }

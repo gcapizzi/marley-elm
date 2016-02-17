@@ -1,6 +1,6 @@
 module Board where
 
-import Column exposing (model, update, view)
+import Column exposing (init, update, view)
 
 import Html exposing (..)
 import Html.Events exposing (onClick)
@@ -15,10 +15,10 @@ type alias Model =
   , nextId : ID
   }
 
-model : Model
-model =
-  { columns = [(0, Column.model)]
-  , nextId = 1
+init : Model
+init =
+  { columns = [(1, Column.init)]
+  , nextId = 2
   }
 
 update : Action -> Model -> Model
@@ -27,7 +27,7 @@ update action model =
     AddColumn ->
       { model |
         nextId = model.nextId + 1
-      , columns = model.columns ++ [(model.nextId, { cards = [], field = ""})]
+      , columns = model.columns ++ [(model.nextId, Column.init)]
       }
     Modify id columnAction ->
       let updateColumn (columnId, columnModel) =
