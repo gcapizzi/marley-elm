@@ -13,7 +13,11 @@ columnTests = [
     test "Adding a card to a column" (
       let model = { cards = [{ title = "foo" }], field = "bar" }
           newModel = Column.update (Column.AddCard) model
-      in (assert (newModel == {cards = [{ title = "foo" }, { title = "bar" }], field = "" })))
+      in (assert (newModel == {cards = [{ title = "foo" }, { title = "bar" }], field = "" }))),
+    test "Adding a card with an empty title" (
+      let model = { cards = [{ title = "foo" }], field = "" }
+          newModel = Column.update (Column.AddCard) model
+      in (assert (newModel == model)))
   ]
 
 boardTests = [

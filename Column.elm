@@ -1,5 +1,6 @@
 module Column where
 
+import String
 import Html exposing (..)
 import Html.Attributes exposing (class, value)
 import Html.Events exposing (on, targetValue, keyCode)
@@ -26,10 +27,13 @@ update action model =
   case action of
     UpdateField text -> { model | field = text }
     AddCard ->
-      { model |
-        field = "",
-        cards = model.cards ++ [{ title = model.field }]
-      }
+      if (String.isEmpty model.field) then
+        model
+      else
+        { model |
+          field = "",
+          cards = model.cards ++ [{ title = model.field }]
+        }
 
 card : Card -> Html
 card c =
