@@ -25,7 +25,9 @@ init =
 update : Action -> Model -> Model
 update action model =
   case action of
-    UpdateField text -> { model | field = text }
+    UpdateField text ->
+      { model |
+        field = text }
     AddCard ->
       if (String.isEmpty model.field) then
         model
