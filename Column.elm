@@ -39,7 +39,7 @@ update action model =
 
 card : Card -> Html
 card c =
-  li
+  article
     [ class "card" ]
     [ text c.title ]
 
@@ -55,13 +55,14 @@ onEnter address value =
 view : Address Action -> Model -> Html
 view address model =
   div
-    []
-    [ ul
-      [ class "list" ]
-      (List.map card model.cards)
-    , input
-      [ value model.field
-      , on "input" targetValue (Signal.message address << UpdateField)
-      , onEnter address AddCard ]
-      []
+  []
+  [ section
+    [ class "list" ]
+    (List.map card model.cards)
+  , input
+    [ value model.field
+    , on "input" targetValue (Signal.message address << UpdateField)
+    , onEnter address AddCard
     ]
+    []
+  ]
