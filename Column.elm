@@ -52,17 +52,16 @@ onEnter address value =
     (Json.Decode.customDecoder keyCode is13)
     (\_ -> Signal.message address value)
 
-view : Address Action -> Model -> Html
-view address model =
-  div
-  []
-  [ section
-    [ class "list" ]
-    (List.map card model.cards)
-  , input
+newCardInput address model =
+  input
     [ value model.field
     , on "input" targetValue (Signal.message address << UpdateField)
     , onEnter address AddCard
     ]
     []
-  ]
+
+view : Address Action -> Model -> Html
+view address model =
+  section
+  [ class "column" ]
+  ((List.map card model.cards) ++ [newCardInput address model])
